@@ -202,13 +202,6 @@ static void MX_GPIO_Init(void)
   while (1){
 	  uint32_t motionState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8);
 	  uint32_t buttonState = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
-	  if (buttonState == 1){
-		  if (count == 4){
-			  count = 0;
-		  }else{
-			  count += 1;
-		  }
-	  }
 
 	  if (motionState == 1){
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
@@ -219,6 +212,17 @@ static void MX_GPIO_Init(void)
 		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 		  HAL_Delay(10);
 	  }
+
+	  if (buttonState == 1){
+		  if (count != 4)
+			  count += 1;
+		  else
+			  count = 0;
+	  }
+
+
+
+
 }
 
 //  while (1){
